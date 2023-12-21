@@ -34,25 +34,23 @@ public class UserProvider {
         this.jwtService = jwtService;
     }
 
-    public List<GetUserRes> getUsers() throws BaseException{
-        try{
+    public List<GetUserRes> getUsers() throws BaseException {
+        try {
             List<GetUserRes> getUserRes = userDao.getUsers();
             return getUserRes;
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-    public List<GetUserRes> getUsersByEmail(String email) throws BaseException{
-        try{
+    public List<GetUserRes> getUsersByEmail(String email) throws BaseException {
+        try {
             List<GetUserRes> getUsersRes = userDao.getUsersByEmail(email);
             return getUsersRes;
-        }
-        catch (Exception exception) {
+        } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
-                    }
+    }
 
 
     public GetUserRes getUser(int userIdx) throws BaseException {
@@ -64,15 +62,15 @@ public class UserProvider {
         }
     }
 
-    public int checkEmail(String email) throws BaseException{
-        try{
+    public int checkEmail(String email) throws BaseException {
+        try {
             return userDao.checkEmail(email);
-        } catch (Exception exception){
+        } catch (Exception exception) {
             throw new BaseException(DATABASE_ERROR);
         }
     }
 
-    public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException{
+    public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException {
         User user = userDao.getPwd(postLoginReq);
         String password;
         try {
@@ -81,12 +79,11 @@ public class UserProvider {
             throw new BaseException(PASSWORD_DECRYPTION_ERROR);
         }
 
-        if(postLoginReq.getPassword().equals(password)){
+        if (postLoginReq.getPassword().equals(password)) {
             int userIdx = userDao.getPwd(postLoginReq).getUserIdx();
             String jwt = jwtService.createJwt(userIdx);
-            return new PostLoginRes(userIdx,jwt);
-        }
-        else{
+            return new PostLoginRes(userIdx, jwt);
+        } else {
             throw new BaseException(FAILED_TO_LOGIN);
         }
 
