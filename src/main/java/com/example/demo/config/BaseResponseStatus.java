@@ -31,6 +31,9 @@ public enum BaseResponseStatus {
     POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
     POST_USERS_EXISTS_ID(false,2018,"중복된 아아디입니다."),
 
+    // [POST] /videos
+    POST_VIDEO_EMPTY_NAME(false, 2019, "비디오 이름을 입력해주세요."),
+    POST_USERS_EMPTY_URL(false, 2020, "비디오 Url을 확인해주세요."),
 
 
     /**
