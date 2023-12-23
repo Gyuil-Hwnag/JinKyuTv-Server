@@ -75,8 +75,15 @@ public class UserDao {
         String checkEmailQuery = "select exists(select email from UserInfo where email = ?)";
         String checkEmailParams = email;
         return this.jdbcTemplate.queryForObject(checkEmailQuery, int.class, checkEmailParams);
-
     }
+
+    public int checkId(String id) {
+        String checkIdQuery = "select exists(select id from UserInfo where id = ?)";
+        String checkIdParams = id;
+        return this.jdbcTemplate.queryForObject(checkIdQuery, int.class, checkIdParams);
+    }
+
+
 
     public int modifyUserName(PatchUserReq patchUserReq) {
         String modifyUserNameQuery = "update UserInfo set userName = ? where userIdx = ? ";

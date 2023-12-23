@@ -40,6 +40,10 @@ public class UserService {
             throw new BaseException(POST_USERS_EXISTS_EMAIL);
         }
 
+        if (userProvider.checkId(postUserReq.getId()) == 1) {
+            throw new BaseException(POST_USERS_EXISTS_ID);
+        }
+
         String pwd;
         try {
             //암호화

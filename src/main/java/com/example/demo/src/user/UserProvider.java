@@ -70,6 +70,14 @@ public class UserProvider {
         }
     }
 
+    public int checkId(String id) throws BaseException {
+        try {
+            return userDao.checkId(id);
+        } catch (Exception exception) {
+            throw new BaseException(DATABASE_ERROR);
+        }
+    }
+
     public PostLoginRes logIn(PostLoginReq postLoginReq) throws BaseException {
         User user = userDao.getPwd(postLoginReq);
         String password;
