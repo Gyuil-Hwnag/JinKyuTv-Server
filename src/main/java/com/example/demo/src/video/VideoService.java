@@ -41,7 +41,8 @@ public class VideoService {
         try {
             int resultName = videoDao.modifyVideoName(patchVideoReq);
             int resultUrl = videoDao.modifyVideoUrl(patchVideoReq);
-            if (resultName == 0 || resultUrl == 0) {
+            int resultThumbnail = videoDao.modifyVideoThumbnail(patchVideoReq);
+            if (resultName == 0 || resultUrl == 0 || resultThumbnail == 0) {
                 throw new BaseException(MODIFY_FAIL_USERNAME);
             }
         } catch (Exception exception) {

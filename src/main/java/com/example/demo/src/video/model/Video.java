@@ -11,4 +11,5 @@ public class Video {
     private int videoIdx;
     private String videoName;
     private String videoUrl;
+    private String videoThumbnail;
 }

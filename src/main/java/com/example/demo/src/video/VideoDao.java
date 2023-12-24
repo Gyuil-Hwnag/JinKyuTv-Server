@@ -26,7 +26,8 @@ public class VideoDao {
                 (rs, rowNum) -> new GetVideoRes(
                         rs.getInt("videoIdx"),
                         rs.getString("videoName"),
-                        rs.getString("videoUrl")
+                        rs.getString("videoUrl"),
+                        rs.getString("videoThumbnail")
                 )
         );
     }
@@ -38,7 +39,9 @@ public class VideoDao {
                 (rs, rowNum) -> new GetVideoRes(
                         rs.getInt("videoIdx"),
                         rs.getString("videoName"),
-                        rs.getString("videoUrl")),
+                        rs.getString("videoUrl"),
+                        rs.getString("videoThumbnail")
+                ),
                 getVideosByNamelParams);
     }
 
@@ -49,14 +52,16 @@ public class VideoDao {
                 (rs, rowNum) -> new GetVideoRes(
                         rs.getInt("videoIdx"),
                         rs.getString("videoName"),
-                        rs.getString("videoUrl")),
+                        rs.getString("videoUrl"),
+                        rs.getString("videoThumbnail")
+                ),
                 getVideoParams);
     }
 
 
     public int createVideo(PostVideoReq postVideoReq) {
-        String createVideoQuery = "insert into VideoInfo (videoName, videoUrl) VALUES (?,?)";
-        Object[] createVideoParams = new Object[]{postVideoReq.getVideoName(), postVideoReq.getVideoUrl()};
+        String createVideoQuery = "insert into VideoInfo (videoName, videoUrl, videoThumbnail) VALUES (?,?,?)";
+        Object[] createVideoParams = new Object[]{postVideoReq.getVideoName(), postVideoReq.getVideoUrl(), postVideoReq.getVideoThumbnail()};
         this.jdbcTemplate.update(createVideoQuery, createVideoParams);
 
         String lastInserIdQuery = "select last_insert_id()";
@@ -75,5 +80,12 @@ public class VideoDao {
         Object[] modifyVideoUrlParams = new Object[]{patchVideoReq.getVideoUrl(), patchVideoReq.getVideoIdx()};
 
         return this.jdbcTemplate.update(modifyVideoUrlQuery, modifyVideoUrlParams);
+    }
+
+    public int modifyVideoThumbnail(PatchVideoReq patchVideoReq) {
+        String modifyVideoThumbnailQuery = "update VideoInfo set videoThumbnail = ? where videoIdx = ? ";
+        Object[] modifyVideoThumbnailParams = new Object[]{patchVideoReq.getVideoThumbnail(), patchVideoReq.getVideoIdx()};
+
+        return this.jdbcTemplate.update(modifyVideoThumbnailQuery, modifyVideoThumbnailParams);
     }
 }

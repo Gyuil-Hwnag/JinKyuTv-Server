@@ -10,4 +10,5 @@ import lombok.*;
 public class PostVideoReq {
     @JsonProperty("videoName") private String videoName;
     @JsonProperty("videoUrl") private String videoUrl;
+    @JsonProperty("videoThumbnail") private String videoThumbnail;
 }

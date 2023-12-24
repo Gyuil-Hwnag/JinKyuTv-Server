@@ -13,4 +13,5 @@ public class GetVideoRes {
     @JsonProperty("videoIdx") private int videoIdx;
     @JsonProperty("videoName") private String videoName;
     @JsonProperty("videoUrl") private String videoUrl;
+    @JsonProperty("videoThumbnail") private String videoThumbnail;
 }

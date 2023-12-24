@@ -42,7 +42,7 @@ public class VideoController {
     //Query String
     @ResponseBody
     @GetMapping("") // (GET) 127.0.0.1:9000/app/videos
-    public BaseResponse<List<GetVideoRes>> getUsers(@RequestParam(required = false) String videoName) {
+    public BaseResponse<List<GetVideoRes>> getVideos(@RequestParam(required = false) String videoName) {
         try {
             if (videoName == null) {
                 List<GetVideoRes> getUsersRes = videoProvider.getVideos();
@@ -65,7 +65,7 @@ public class VideoController {
     // Path-variable
     @ResponseBody
     @GetMapping("/{videoIdx}") // (GET) 127.0.0.1:9000/app/videos/:videoIdx
-    public BaseResponse<GetVideoRes> getUser(@PathVariable("videoIdx") int videoIdx) {
+    public BaseResponse<GetVideoRes> getVideo(@PathVariable("videoIdx") int videoIdx) {
         // Get Users
         try {
             GetVideoRes getVideoRes = videoProvider.getVideo(videoIdx);
@@ -107,9 +107,9 @@ public class VideoController {
      */
     @ResponseBody
     @PatchMapping("/{videoIdx}")
-    public BaseResponse<String> modifyUserName(@PathVariable("videoIdx") int videoIdx, @RequestBody Video video) {
+    public BaseResponse<String> modifyVideo(@PathVariable("videoIdx") int videoIdx, @RequestBody Video video) {
         try {
-            PatchVideoReq patchVideoReq = new PatchVideoReq(videoIdx, video.getVideoName(), video.getVideoUrl());
+            PatchVideoReq patchVideoReq = new PatchVideoReq(videoIdx, video.getVideoName(), video.getVideoUrl(), video.getVideoThumbnail());
             videoService.modifyVideo(patchVideoReq);
 
             String result = "";
