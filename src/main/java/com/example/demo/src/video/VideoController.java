@@ -7,7 +7,6 @@ import com.example.demo.src.video.model.request.PatchVideoReq;
 import com.example.demo.src.video.model.request.PostVideoReq;
 import com.example.demo.src.video.model.response.GetVideoRes;
 import com.example.demo.src.video.model.response.PostVideoRes;
-import com.example.demo.utils.JwtService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,14 +26,11 @@ public class VideoController {
     private final VideoProvider videoProvider;
     @Autowired
     private final VideoService videoService;
-    @Autowired
-    private final JwtService jwtService;
 
 
-    public VideoController(VideoProvider videoProvider, VideoService videoService, JwtService jwtService) {
+    public VideoController(VideoProvider videoProvider, VideoService videoService) {
         this.videoProvider = videoProvider;
         this.videoService = videoService;
-        this.jwtService = jwtService;
     }
 
     /**
