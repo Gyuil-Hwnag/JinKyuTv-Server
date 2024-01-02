@@ -90,7 +90,7 @@ public class UserProvider {
         if (postLoginReq.getPassword().equals(password)) {
             int userIdx = userDao.getPwd(postLoginReq).getUserIdx();
             String jwt = jwtService.createJwt(userIdx);
-            return new PostLoginRes(userIdx, jwt);
+            return new PostLoginRes(userIdx, jwt, user.getUserName());
         } else {
             throw new BaseException(FAILED_TO_LOGIN);
         }
